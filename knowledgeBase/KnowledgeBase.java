@@ -44,15 +44,30 @@ public class KnowledgeBase {
 		System.out.println(K_B_imply_R());
 	}
 	
+	static boolean[][] generate_combination(){
+		boolean[][] data_structure  = new boolean[8][3];
+		int i = 0;
+		while(i < 8) {
+			if(i % 2 ==0) {
+				data_structure[i][2] = true;
+			}
+			if((i>=0 && i<2) || (i>=4 && i<6 ) ) {
+				data_structure[i][1] = true;
+			}
+			if(i > 3) {
+				data_structure[i][0] = false;
+			} else {
+				data_structure[i][0] = true;
+			}
+			i++;
+		}
+		return data_structure;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		boolean[][] data_structure = {
-				{true, true, true}, {true, true, false},
-				{true, false, true}, {true, false, false},
-				{false, true, true}, {false, true, false},
-				{false, false, true}, {false, false, false}
-		};
-		
+		//dynamically produce the combination
+		boolean[][] data_structure  = generate_combination();
 		System.out.println("P          Q          R      (p^Q)=>R    Q=>P      KB        KB=>R");
 		for(int i=0; i<data_structure.length ; i++) {
 			new KnowledgeBase(data_structure[i][0], data_structure[i][1], data_structure[i][2]);
